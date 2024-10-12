@@ -30,6 +30,7 @@ namespace TopWar.GameGUI
         //public static dmsoft Dm { get; set; } = new dmsoft();
         public MainWindow()
         {
+            //debug
             InitializeComponent();
             cfg = 读取本地服务器配置()!;
             if (cfg == null)
