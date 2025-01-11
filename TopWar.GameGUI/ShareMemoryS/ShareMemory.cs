@@ -1,4 +1,5 @@
-﻿using System.IO.MemoryMappedFiles;
+﻿using System.Diagnostics;
+using System.IO.MemoryMappedFiles;
 
 namespace TopWar.GameGUI.ShareMemoryS
 {

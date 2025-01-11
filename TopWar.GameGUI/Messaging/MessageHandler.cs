@@ -1,4 +1,5 @@
 ﻿using CefSharp;
+using System.Diagnostics;
 using System.IO;
 using System.Text.Json.Nodes;
 using System.Windows;
@@ -74,6 +75,7 @@ namespace TopWar.GameGUI.Messaging
 
         private async Task HandleScreenShot32RequestAsync(JsonNode jsonNode, StreamWriter writer)
         {
+            
             int length = _imageProcessor.WriteToSharedMemory(true);
             await writer.WriteLineAsync($"{length}");
         }

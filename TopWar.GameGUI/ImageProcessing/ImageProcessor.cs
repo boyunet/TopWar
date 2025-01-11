@@ -1,7 +1,9 @@
-﻿using System.Drawing;
+﻿using System.Diagnostics;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.IO.MemoryMappedFiles;
+using System.Reflection.PortableExecutable;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using TopWar.GameGUI.ShareMemoryS;
@@ -41,12 +43,15 @@ namespace TopWar.GameGUI.ImageProcessing
             byte[]? imageBytes = is32Bit ? GetBitmapData(1280, 760, true) : GetBitmapData(1280, 760, false);
 
             if (imageBytes == null)
+            {
                 return 0;
+            }
             else
             {
                 int length = imageBytes.Length;
                 _shareMemoryAccessor!.Write(0, length); // 写入数据长度
                 _shareMemoryAccessor.WriteArray(sizeof(int), imageBytes, 0, length);
+                //System.IO.File.WriteAllBytes("image.bmp", imageBytes);
                 return imageBytes.Length;
             }
         }
