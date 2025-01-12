@@ -30,7 +30,6 @@ namespace TopWar.GameGUI
         //public static dmsoft Dm { get; set; } = new dmsoft();
         public MainWindow()
         {
-            //debug
             InitializeComponent();
             cfg = 读取本地服务器配置()!;
             if (cfg == null)
@@ -54,7 +53,10 @@ namespace TopWar.GameGUI
 
             // 创建 OcrService 实例
             IOcrService ocrService = new OcrService();
-            ImageProcessor imageProcessor = new(shareMemory);
+
+            //ImageProcessor imageProcessor = new(shareMemory);
+            //IImageProcessor imageProcessor = new ImageProcessor(cfg.Server!);
+            IImageProcessor imageProcessor = new ImageProcessor(shareMemory);
 
             // 创建 MessageHandler 实例，注入 OcrService
             IMessageHandler messageHandler = new MessageHandler(ocrService, imageProcessor);

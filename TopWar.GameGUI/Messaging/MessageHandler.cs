@@ -1,12 +1,14 @@
 ﻿using CefSharp;
 using System.Diagnostics;
 using System.IO;
+using System.IO.MemoryMappedFiles;
 using System.Text.Json.Nodes;
 using System.Windows;
 using System.Windows.Interop;
 using TopWar.GameGUI.ImageProcessing;
 using TopWar.GameGUI.libs;
 using TopWar.GameGUI.Ocr;
+using TopWar.GameGUI.ShareMemoryS;
 
 namespace TopWar.GameGUI.Messaging
 {
@@ -24,6 +26,7 @@ namespace TopWar.GameGUI.Messaging
         public async Task HandleMessageAsync(JsonNode jsonNode, StreamWriter writer)
         {
             var command = jsonNode["Command"]?.GetValue<string>() ?? "";
+            //Debug.WriteLine(command);
 
             switch (command)
             {

@@ -1,8 +1,10 @@
 ﻿using System.Collections.Concurrent;
 using System.IO;
+using System.IO.MemoryMappedFiles;
 using System.IO.Pipes;
 using System.Text.Json.Nodes;
 using TopWar.GameGUI.Messaging;
+using TopWar.GameGUI.ShareMemoryS;
 
 namespace TopWar.GameGUI.Pipe
 {
