@@ -70,7 +70,7 @@ namespace TopWar.GameGUI.Messaging
             var y1 = jsonNode["y1"]?.GetValue<int>() ?? 0;
             var x2 = jsonNode["x2"]?.GetValue<int>() ?? 0;
             var y2 = jsonNode["y2"]?.GetValue<int>() ?? 0;
-            var imageBytes = ImageProcessor.GetBitmapData(760, 1280, true);
+            var imageBytes = ImageProcessor.GetBitmapData(1280, 760, true);
             var cropeImageData = ImageProcessor.CropImage(imageBytes!, x1, y1, x2, y2);
             var result = _ocrService.PerformOcrAsync(cropeImageData);
             await writer.WriteLineAsync(result);

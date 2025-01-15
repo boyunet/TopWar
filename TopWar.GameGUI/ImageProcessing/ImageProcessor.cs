@@ -18,6 +18,7 @@ namespace TopWar.GameGUI.ImageProcessing
         private readonly ShareMemory _shareMemory; // 持有对 ShareMemory 的引用
 
         public ImageProcessor(IShareMemory shareMemory)
+
         //public ImageProcessor(string serverID)
         {
             //_mapName = $"SharedMemoryScreenshot{serverID}";
@@ -49,6 +50,7 @@ namespace TopWar.GameGUI.ImageProcessing
         }
         public static byte[] CropImage(byte[] imageBytes, int x1, int y1, int x2, int y2)
         {
+            System.IO.File.WriteAllBytes("CropImage0.bmp", imageBytes);
             using var ms = new MemoryStream(imageBytes);
             using var originalImage = new Bitmap(ms);
             // 计算切割区域的宽度和高度
@@ -66,6 +68,7 @@ namespace TopWar.GameGUI.ImageProcessing
             // 将切割后的图像转换为字节数组
             using var resultStream = new MemoryStream();
             croppedImage.Save(resultStream, ImageFormat.Bmp);
+            System.IO.File.WriteAllBytes("CropImage.bmp", resultStream.ToArray());
             return resultStream.ToArray();
         }
         private void 测试截图然后写入共享内存()
@@ -163,15 +166,17 @@ namespace TopWar.GameGUI.ImageProcessing
                 int length = imageBytes.Length;
 
                 //先写入长度,后面加上数据
-                //_shareMemoryAccessor!.Write(0, length); // 写入数据长度
-                //_shareMemoryAccessor.WriteArray(sizeof(int), imageBytes, 0, length);
+                //_accessor.Write(0, length); // 写入数据长度
+                //_accessor.WriteArray(sizeof(int), imageBytes, 0, length);
 
                 //直接写入数据,头部不加数据长度了
                 //string str = "abcdefg";
                 //byte[] make = Encoding.UTF8.GetBytes(str);
                 //_shareMemoryAccessor!.WriteArray(0, make, 0, make.Length);
                 //System.IO.File.WriteAllBytes("测试截图然后写入共享内存.bmp", make);
+
                 _accessor.WriteArray(0, imageBytes, 0, length);
+                
                 //System.IO.File.WriteAllBytes("测试共享内存imageBytes.bmp", imageBytes);
                 //测试读取共享内存数据然后写入本地文件(3606);
 
